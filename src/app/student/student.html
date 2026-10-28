@@ -1,0 +1,71 @@
+<h1>Student Management System</h1>
+
+<p>Manage student records and academic performance.</p>
+
+<p>
+  <strong>Total Students</strong>
+  {{ students.length }}
+</p>
+
+<p>
+  <strong>Class Average</strong>
+  {{ average.toFixed(2) }}
+</p>
+
+<h2>Add a Student</h2>
+
+<input
+  type="text"
+  placeholder="Student name"
+  [(ngModel)]="studentName"
+>
+
+<input
+  type="number"
+  placeholder="Marks (0-100)"
+  [(ngModel)]="marks"
+>
+
+<button (click)="addStudent()">Add Student</button>
+
+<h2>Student Records</h2>
+
+<input
+  type="text"
+  placeholder="Search by student name"
+  [(ngModel)]="searchText"
+>
+
+<br><br>
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Marks</th>
+      <th>Result</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    @for (student of filteredStudents; track student.id) {
+      <tr>
+        <td>{{ student.id }}</td>
+        <td>{{ student.name }}</td>
+        <td>{{ student.marks }}</td>
+
+        <td>
+          {{ student.marks >= 40 ? 'Pass' : 'Fail' }}
+        </td>
+
+        <td>
+          <button (click)="deleteStudent(student.id)">
+            Delete
+          </button>
+        </td>
+      </tr>
+    }
+  </tbody>
+</table>
